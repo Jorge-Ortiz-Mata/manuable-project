@@ -3,4 +3,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  namespace :api do
+    post "sessions/authenticate/token", to: "sessions#authenticate_with_token"
+  end
 end
