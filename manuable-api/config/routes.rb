@@ -6,5 +6,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     post "sessions/authenticate/token", to: "sessions#authenticate_with_token"
+    namespace :v1 do
+      post "/shipping/rates", to: "sessions#shipping_rates"
+    end
   end
 end
