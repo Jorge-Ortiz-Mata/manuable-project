@@ -1,17 +1,27 @@
 module Api
   class SessionsController < ApplicationController
     def authenticate_with_token
-      conn = Faraday.new(
-        url: 'https://apis-sandbox.fedex.com/oauth/token',
-        params: user_params,
-        headers: {'Content-Type' => 'application/x-www-form-urlencoded'}
-      )
+      client_params
+      url = 'https://apis-sandbox.fedex.com/oauth/token'
 
-      response = conn.post
+      response = Faraday.post(url) do |req|
+        req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+        req.body = URI.encode_www_form(client_params)
+      end
 
-      debugger
+      access_token = JSON.parse(response.body)['access_token']
 
-      render json: { response: response }
+      render json: { access_token: access_token }
+    end
+
+    private
+
+    def client_params
+      @data = {
+        :grant_type => 'client_credentials',
+        :client_id => request.headers['HTTP_CLIENT_ID'],
+        :client_secret => request.headers['HTTP_CLIENT_SECRET']
+      }
     end
   end
 end
