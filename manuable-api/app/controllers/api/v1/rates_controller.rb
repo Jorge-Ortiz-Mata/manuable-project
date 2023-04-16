@@ -58,7 +58,7 @@ module Api
       def address_params(param)
         {
           'countryCode': params['quote_params'][param]['country'].upcase,
-          'postalCode': params['quote_params'][param]['zip'].to_i,
+          'postalCode': params['quote_params'][param]['zip'].to_i
         }
       end
 
@@ -74,7 +74,7 @@ module Api
       def weight_params
         {
           'units': params['quote_params']['parcel']['mass_unit'].upcase,
-          'value': params['quote_params']['parcel']['weight'].to_f,
+          'value': params['quote_params']['parcel']['weight'].to_f
         }
       end
     end
