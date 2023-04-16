@@ -1,10 +1,14 @@
-def set_rates
-  my_object
+def set_shipping_rates
+
 end
 
-def my_object
-  {
-    :hello => 'puto',
-    :world => 'wtf'
-  }
-end
+# def set_rates
+#   my_object
+# end
+
+# def my_object
+#   {
+#     :hello => 'puto',
+#     :world => 'wtf'
+#   }
+# end
