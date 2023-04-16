@@ -9,6 +9,10 @@ It gets the shipping rates from the FedEx API.
 
 ![](./assets/fedex.png)
 
+## Demo.
+
+![](./assets/gif.gif)
+
 ## What you need.
 ****
 
