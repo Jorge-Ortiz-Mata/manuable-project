@@ -20,6 +20,8 @@ gem "puma", "~> 5.0"
 
 gem 'faraday'
 
+gem 'fedex', path: '../fedex'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 

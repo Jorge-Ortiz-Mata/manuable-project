@@ -1,3 +1,10 @@
+PATH
+  remote: ../fedex
+  specs:
+    fedex (1.0.0)
+      faraday
+      rails (>= 7.0.4.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -172,6 +179,7 @@ DEPENDENCIES
   debug
   dotenv-rails
   faraday
+  fedex!
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.4, >= 7.0.4.3)
