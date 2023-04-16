@@ -5,7 +5,7 @@ module Api
         response = send_http_request
 
         if response.status.eql? 200
-          render json: { response: JSON.parse(response.body) }, status: :ok
+          render json: { response: build_reponse(response) }, status: :ok
         else
           render json: { response: 'Error while retrieving information' }, status: :unprocessable_entity
         end
@@ -76,6 +76,23 @@ module Api
           'units': params['quote_params']['parcel']['mass_unit'].upcase,
           'value': params['quote_params']['parcel']['weight'].to_f
         }
+      end
+
+      def build_reponse(response)
+        new_response = Array.new
+
+        JSON.parse(response.body)['output']['rateReplyDetails'].each do |detail|
+          new_response << {
+            "price": (detail['ratedShipmentDetails'][0]['totalNetCharge'] * 18.01).round(2),
+            "currency": "mxn",
+            "service_level": {
+              "name": detail['serviceType'].humanize,
+              "token": detail['serviceType']
+            }
+          }
+        end
+
+        JSON.parse(new_response.to_json)
       end
     end
   end
