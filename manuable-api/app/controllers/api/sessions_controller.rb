@@ -1,7 +1,7 @@
 module Api
   class SessionsController < ApplicationController
     def authenticate_with_token
-      response = send_request
+      response = send_http_request
 
       if response.status.eql? 200
         access_token = JSON.parse(response.body)['access_token']
@@ -13,7 +13,7 @@ module Api
 
     private
 
-    def send_request
+    def send_http_request
       url = 'https://apis-sandbox.fedex.com/oauth/token'
       data = {
         :grant_type => 'client_credentials',
