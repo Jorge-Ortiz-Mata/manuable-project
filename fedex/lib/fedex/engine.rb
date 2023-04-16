@@ -24,8 +24,20 @@ module Fedex
   end
 
   module Rates
-    def self.shipping_rates
-      set_shipping_rates
+    def self.set_shipping_rates(access_token, account_id, params)
+      url = 'https://apis-sandbox.fedex.com/rate/v1/rates/quotes'
+
+      response = Faraday.post(url) do |req|
+        req.headers['Content-Type'] = 'application/json'
+        req.headers['authorization'] = "#{access_token}"
+        req.body = body_params(account_id, params)
+      end
+
+      if response.status.eql? 200
+        return { shipping_rates: build_reponse(response), status: 200 }
+      else
+        return { shipping_rates: [], status: response.status }
+      end
     end
   end
 end
